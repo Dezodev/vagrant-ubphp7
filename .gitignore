@@ -1,0 +1,11 @@
+.DS_Store
+.vagrant
+.idea
+
+# Config files
+etc/*
+!etc/config.sample.yaml
+
+# Html files
+/sites/*
+!/sites/.gitkeep

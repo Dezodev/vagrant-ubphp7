@@ -1,2 +1,2 @@
 # vagrant-ubphp7
-Vagrant PHP 7 with ubuntu
+Vagrant simple LAMP with PHP 7 and ubuntu
