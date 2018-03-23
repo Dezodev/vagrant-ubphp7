@@ -3,4 +3,5 @@ configs:
   general:
     public_ip: '192.168.51.10'
     memory: 2048
-    mysql_root_pwd: root
+    mysql_usr_name: 'dbuser'
+    mysql_usr_pwd: 'dbuser'

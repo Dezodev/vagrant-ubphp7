@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+PASSWORD='rootv66'
+mysql_config_file="/etc/mysql/my.cnf"
+
 updateServer () {
     echo "-- Update packages --"
-    sudo apt-get update
-    sudo apt-get upgrade
+    sudo apt-get -q update
+    sudo apt-get -qy upgrade
 }
 updateServer
 
@@ -27,14 +30,20 @@ a2enmod headers
 a2enmod alias
 
 echo "-- Install Mariadb --"
-sudo apt-get install -y --force-yes mariadb-server
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
-mysql -u root -proot --execute="CREATE DATABASE \`development\` CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci'"
-mysql -u root -proot --execute="UPDATE \`mysql\`.\`user\` SET \`Host\`='%' WHERE \`Host\`='::1' AND \`User\`='root'"
-/etc/init.d/mysql restart
+echo "mysql-server mysql-server/root_password password ${PASSWORD}" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password ${PASSWORD}" | debconf-set-selections
+sudo apt-get -y install mysql-client mysql-server
+
+sed -i "s/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" ${mysql_config_file}
+
+# Allow root access from any host
+echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION" | mysql -u root --password=${PASSWORD}
+echo "GRANT PROXY ON ''@'' TO 'root'@'%' WITH GRANT OPTION" | mysql -u root --password=${PASSWORD}
+
+service mysql restart
 
 echo "-- Install other web packages --"
-sudo apt-get install -y --force-yes git-core nodejs rabbitmq-server redis-server
+sudo apt-get install -y --force-yes git-core rabbitmq-server redis-server
 
 echo "-- Install php 7.0 packages --"
 sudo apt-get install -y --force-yes php7.0 php7.0-common php7.0-dev php7.0-json php7.0-opcache php7.0-cli libapache2-mod-php7.0 php7.0-mysql php7.0-fpm php7.0-curl php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-bcmath php7.0-zip
@@ -55,3 +64,7 @@ wget -k https://files.phpmyadmin.net/phpMyAdmin/4.7.8/phpMyAdmin-4.7.8-english.t
 sudo tar -xzvf phpMyAdmin-4.7.8-english.tar.gz -C /var/www/
 sudo rm phpMyAdmin-4.7.8-english.tar.gz
 sudo mv /var/www/phpMyAdmin-4.7.8-english/ /var/www/html/phpmyadmin
+
+echo "-- Final steps --"
+rm -f /var/www/index.html
+cp -uf /vagrant/etc/index.php /var/www/index.php
