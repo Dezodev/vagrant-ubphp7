@@ -10,8 +10,11 @@ Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu/trusty64"
 
     # Mount shared folder
-    config.vm.synced_folder ".", "/vagrant", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp,noatime']
-    config.vm.synced_folder "./sites", "/var/www/vagrant", owner: "vagrant", group: "vagrant"
+    config.vm.synced_folder ".", "/vagrant", id: "core"
+    config.vm.synced_folder "./sites", "/var/www/vagrant",
+        owner: "vagrant",
+        group: "www-data",
+        mount_options: ["dmode=775,fmode=664"]
 
 
     # Network configuration

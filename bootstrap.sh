@@ -90,3 +90,4 @@ sudo rm -rf /var/www/phpMyAdmin-4.7.8-english/
 echo -e "${WHI}-- Final steps --${NC}"
 sudo mkdir /var/www/vagrant/local
 cp -uf /vagrant/etc/index.php /var/www/vagrant/local/index.php
+sudo usermod -a -G vagrant www-data
