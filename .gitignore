@@ -5,6 +5,7 @@
 # Config files
 etc/*
 !etc/config.sample.yaml
+!etc/index.php
 
 # Html files
 /sites/*

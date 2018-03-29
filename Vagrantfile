@@ -11,13 +11,13 @@ Vagrant.configure("2") do |config|
 
     # Mount shared folder
     config.vm.synced_folder ".", "/vagrant", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp,noatime']
-    config.vm.synced_folder "./sites", "/var/www", owner: "vagrant", group: "vagrant"
+    config.vm.synced_folder "./sites", "/var/www/vagrant", owner: "vagrant", group: "vagrant"
 
 
     # Network configuration
     config.vm.network "private_network", ip: configs['configs']['general']['public_ip']
     config.vm.hostname = "ubphpbox"
-    config.hostsupdater.aliases = ["app.dev"]
+    config.hostsupdater.aliases = ["local.test", "phpmyadmin.local.test"]
 
     # SSH configuration
     config.ssh.username = "vagrant"
