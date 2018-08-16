@@ -48,7 +48,7 @@ echo -e "${WHI}-- Install other web packages --${NC}"
 sudo apt-get install -y --force-yes git-core rabbitmq-server redis-server
 
 echo -e "${WHI}-- Install php 7.0 packages --${NC}"
-sudo apt-get install -y --force-yes php7.0 php7.0-common php7.0-dev php7.0-json php7.0-opcache php7.0-cli libapache2-mod-php7.0 php7.0-mysql php7.0-fpm php7.0-curl php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-bcmath php7.0-zip
+sudo apt-get install -y --force-yes php7.0 php7.0-common php7.0-dev php7.0-json php7.0-xml php7.0-opcache php7.0-cli libapache2-mod-php7.0 php7.0-mysql php7.0-fpm php7.0-curl php7.0-gd php7.0-mcrypt php7.0-mbstring php7.0-bcmath php7.0-zip php7.0-imagick
 Update
 
 echo -e "${WHI}-- Configure PHP & Apache --${NC}"
@@ -86,6 +86,15 @@ sudo tar -xzvf phpMyAdmin-4.7.8-english.tar.gz -C /var/www/
 sudo rm phpMyAdmin-4.7.8-english.tar.gz
 sudo mv /var/www/phpMyAdmin-4.7.8-english/ /var/www/phpmyadmin
 sudo rm -rf /var/www/phpMyAdmin-4.7.8-english/
+
+chmod +x /vagrant/sh/install-ImageMagick.sh
+chmod +x /vagrant/sh/install-mailcatcher.sh
+
+echo -e "${WHI}-- Install ImageMagick --${NC}"
+sudo /vagrant/sh/install-ImageMagick.sh
+
+echo -e "${WHI}-- Install mailcatcher --${NC}"
+sudo /vagrant/sh/install-mailcatcher.sh
 
 echo -e "${WHI}-- Final steps --${NC}"
 sudo mkdir /var/www/vagrant/local

@@ -1,0 +1,25 @@
+# -*- shell-script -*-
+# Copyright 1999-2018 ImageMagick Studio LLC
+# Definitions of optional features and configuration values for this build.
+# Intended for use by test scripts.
+MAGICK_FEATURES='DPC Cipher OpenMP'
+top_srcdir='/vagrant/sh/ImageMagick-6.9.10-5'
+top_builddir='/vagrant/sh/ImageMagick-6.9.10-5'
+
+set -a
+COMPARE="/vagrant/sh/ImageMagick-6.9.10-5/utilities/compare"
+COMPOSITE="/vagrant/sh/ImageMagick-6.9.10-5/utilities/composite"
+CONJURE="/vagrant/sh/ImageMagick-6.9.10-5/utilities/conjure"
+CONVERT="/vagrant/sh/ImageMagick-6.9.10-5/utilities/convert"
+DISPLAY="/vagrant/sh/ImageMagick-6.9.10-5/utilities/display"
+IDENTIFY="/vagrant/sh/ImageMagick-6.9.10-5/utilities/identify"
+MONTAGE="/vagrant/sh/ImageMagick-6.9.10-5/utilities/montage" 
+VALIDATE="/vagrant/sh/ImageMagick-6.9.10-5/tests/validate"
+DRAWTEST="/vagrant/sh/ImageMagick-6.9.10-5/tests/drawtest"
+WANDTEST="/vagrant/sh/ImageMagick-6.9.10-5/tests/wandtest"
+LD_LIBRARY_PATH="/vagrant/sh/ImageMagick-6.9.10-5/magick/.libs:/vagrant/sh/ImageMagick-6.9.10-5/wand/.libs:${LD_LIBRARY_PATH}"
+MAGICK_CODER_MODULE_PATH="/vagrant/sh/ImageMagick-6.9.10-5/coders"
+MAGICK_CONFIGURE_PATH="/vagrant/sh/ImageMagick-6.9.10-5/config:/vagrant/sh/ImageMagick-6.9.10-5/config"
+MAGICK_FILTER_MODULE_PATH="/vagrant/sh/ImageMagick-6.9.10-5/filters"
+PATH="/vagrant/sh/ImageMagick-6.9.10-5/utilities:/vagrant/sh/ImageMagick-6.9.10-5/tests:${PATH}"
+set +a
